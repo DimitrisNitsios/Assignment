@@ -4,30 +4,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-import java.util.Vector;
 import java.util.concurrent.Executors;
 
 public class EditListsActivity extends AppCompatActivity {
 
     public static String TAG = "Debugging: ";
 
-    private final Vector<String> data = new Vector<>();
-    private final Vector<String> data2 = new Vector<>();
+   // private final Vector<ListsEntity> data = new Vector<>();
+//    private final Vector<String> data2 = new Vector<>();
+
     private Button saveButton;
     private EditText listName;
     private EditText listDescription;
@@ -81,28 +76,41 @@ public class EditListsActivity extends AppCompatActivity {
                 .getINSTANCE(this)
                 .listsDao()
                 .getAllLists();
-        for (ListsEntity entity :list) {
-            data.add(entity.getListName());
-            data2.add(entity.getDescription());
-        }
-
+//        for (ListsEntity entity :list) {
+//            data.add(entity.getListName());
+//            data.add(entity.getDescription());
+//        }
         // create a new instance of the recyclerview adaptor
         RecyclerView recyclerView = findViewById(R.id.recycler_view9);
 
-        Adapter2 adaptor = new Adapter2(data, data2);
+        Adapter2 adaptor = new Adapter2();
         // Link RecyclerViw to the adaptor
         runOnUiThread(()->{recyclerView.setAdapter(adaptor);});
+        adaptor.setListEntity(list);
     }
+
+
 
     // Method that is called when clicking the save button and assigns tasks(save and update the database) to other threads(onClick)
     public void saveList(View view){
-        Executors.newSingleThreadExecutor().execute(this::saveDB);
+        Executors.newSingleThreadExecutor().execute(this::saveToDB);
         Executors.newSingleThreadExecutor().execute(this::updateDB);
     }
 
+//    public void deleteListRecord(View view){
+//        Executors.newSingleThreadExecutor().execute(()->{deleteRecord();});
+//        Executors.newSingleThreadExecutor().execute(this::updateDB);
+//    }
+
+//    private void deleteRecord(){
+//        ListsEntity listsEntity;
+//        myDatabase.getINSTANCE(this).listsDao().delete(listsEntity);
+//
+//    }
+
 
     // Method that Saves the field values in the ListsEntity (lists table) Not executed on the main thread
-    private void saveDB(){
+    private void saveToDB(){
         final String name = listName.getText().toString().trim();
         final String disc = listDescription.getText().toString().trim();
         ListsEntity entity = new ListsEntity(name, disc);

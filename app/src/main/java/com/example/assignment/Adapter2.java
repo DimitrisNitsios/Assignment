@@ -1,19 +1,28 @@
 package com.example.assignment;
 
+
+
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.RoomDatabase;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Adapter2 extends RecyclerView.Adapter<Adapter2.ViewHolder> {
+    private List<ListsEntity> listEntity = new ArrayList<>();
+    private myDatabase database;
+    private Activity context;
 
-    private final Vector<String> data;
-    private final Vector<String> data2;
 
     @NonNull
     @Override
@@ -26,30 +35,51 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        database = myDatabase.getINSTANCE(context);
+
+        ListsEntity Entity = listEntity.get(position);
         // replace the data
-        String value = data.get(position);
-        String value2 = data2.get(position);
-        holder.nameView.setText(String.valueOf(value));
-        holder.discView.setText(String.valueOf(value2));
+        holder.nameView.setText(Entity.getListName());
+        holder.discView.setText(Entity.getDescription());
+        holder.remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    ListsEntity Entity = listEntity.get(holder.getAdapterPosition());
+
+                    database.listsDao().delete(Entity);
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return listEntity.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder  {
         private final TextView nameView;
         private final TextView discView;
+        private ImageView remove;
+
         public ViewHolder(@NonNull View view) {
             super(view);
             this.nameView = view.findViewById(R.id.listsName);
             this.discView = view.findViewById(R.id.listsDisc);
+            this.remove = view.findViewById(R.id.removeList);
+
         }
+
+
     }
 
-    public Adapter2 (Vector<String> data, Vector<String> data2) {
-        this.data  =  data;
-        this.data2 =  data2;
+    public void setListEntity(List<ListsEntity> listEntity) {
+        this.listEntity = listEntity;
+        notifyDataSetChanged();
+    }
+
+    public ListsEntity getDataAt(int position) {
+        return listEntity.get(position);
     }
 }
+

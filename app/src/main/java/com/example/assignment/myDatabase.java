@@ -10,8 +10,6 @@ import androidx.room.RoomDatabase;
 @Database(entities = {ListsEntity.class, ProductsEntity.class}, version = 1)
 public abstract class myDatabase  extends RoomDatabase {
 
-
-
     private static volatile myDatabase INSTANCE;
 
     public abstract ListsDao listsDao();
@@ -23,8 +21,10 @@ public abstract class myDatabase  extends RoomDatabase {
     // Only on thread at the time may access this method
     public static synchronized  myDatabase getINSTANCE(Context context) {
         if (INSTANCE == null) {
+            // Initialize database (if Empty)
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                     myDatabase.class, "my_database" )
+                    .allowMainThreadQueries()
                     .build();
         }
         return INSTANCE;
