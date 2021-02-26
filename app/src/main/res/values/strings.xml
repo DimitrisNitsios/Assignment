@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Assignment</string>
+    <string name="save">SAVE</string>
+    <string name="description">Description</string>
+    <string name="name_the_list">Name the List</string>
+    <string name="type_the_product_code">Type the Product Code</string>
+    <string name="list_description">List Description</string>
+    <string name="enter_the_lists_s_name">Enter the Lists\'s Name</string>
+
+    <string name="products">Products</string>
+    <string name="lists">Lists</string>
+    <string name="list_name">List Name</string>
+    <string name="input_code">Input Code</string>
+
+</resources>
