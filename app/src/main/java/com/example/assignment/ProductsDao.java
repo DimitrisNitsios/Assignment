@@ -25,7 +25,7 @@ public interface ProductsDao {
     void deleteAllProducts();
 
     // any changes that happened to the table values will automatically be updated and activity will be notified
-    @Query("SELECT * FROM Products_Table ORDER BY productCode")
-    LiveData<List<ProductsEntity>> getAllProducts();
+    @Query("SELECT * FROM Products_Table ORDER BY code")
+    List<ProductsEntity> getAllProducts();
 
 }

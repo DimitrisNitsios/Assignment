@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.List;
 import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,9 +37,17 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
 
-        Adapter adaptor = new Adapter(data);
+        Adapter adaptor = new Adapter();
         // Link RecyclerViw to the adaptor
-        recyclerView.setAdapter(adaptor);
+        runOnUiThread(()->{recyclerView.setAdapter(adaptor);});
+
+        final List<ProductsEntity>  productsEntities =  myDatabase
+                .getINSTANCE(this)
+                .productsDao()
+                .getAllProducts();
+
+        adaptor.setProductsEntities(productsEntities);
+
 
         Toolbar tool = findViewById(R.id.toolbar);
         tool.setNavigationOnClickListener(this::goToProductDescriptionActivity);

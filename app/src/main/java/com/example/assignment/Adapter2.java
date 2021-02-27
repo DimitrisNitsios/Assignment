@@ -1,7 +1,5 @@
 package com.example.assignment;
 
-
-
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,17 +10,15 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.RoomDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.concurrent.Executors;
 
 public class Adapter2 extends RecyclerView.Adapter<Adapter2.ViewHolder> {
-    private List<ListsEntity> listEntity = new ArrayList<>();
+    private List<ListsEntity> listsEntities = new ArrayList<>();
     private myDatabase database;
     private Activity context;
-
 
     @NonNull
     @Override
@@ -37,24 +33,28 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         database = myDatabase.getINSTANCE(context);
 
-        ListsEntity Entity = listEntity.get(position);
+        ListsEntity Entity = listsEntities.get(position);
         // replace the data
         holder.nameView.setText(Entity.getListName());
         holder.discView.setText(Entity.getDescription());
-        holder.remove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    ListsEntity Entity = listEntity.get(holder.getAdapterPosition());
+        holder.remove.setOnClickListener(v -> {
 
-                    database.listsDao().delete(Entity);
-            }
+            // Onclicklistener  @override was converted to lambda ( to remember)
+            Executors.newSingleThreadExecutor().execute(()->{
+                ListsEntity Entity1 = listsEntities.get(position);
+                // Delete the record from the database
+                database.listsDao().delete(Entity1);
+                listsEntities.remove(position);});
+
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, listsEntities.size());
         });
 
     }
 
     @Override
     public int getItemCount() {
-        return listEntity.size();
+        return listsEntities.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder  {
@@ -67,19 +67,16 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.ViewHolder> {
             this.nameView = view.findViewById(R.id.listsName);
             this.discView = view.findViewById(R.id.listsDisc);
             this.remove = view.findViewById(R.id.removeList);
-
         }
-
-
     }
 
-    public void setListEntity(List<ListsEntity> listEntity) {
-        this.listEntity = listEntity;
+    public void setListsEntities(List<ListsEntity> listsEntities) {
+        this.listsEntities = listsEntities;
         notifyDataSetChanged();
     }
 
     public ListsEntity getDataAt(int position) {
-        return listEntity.get(position);
+        return listsEntities.get(position);
     }
 }
 

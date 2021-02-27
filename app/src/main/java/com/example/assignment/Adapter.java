@@ -8,11 +8,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
-    private final Vector<Double> data;
+    private List<ProductsEntity> productsEntities = new ArrayList<>();
 
     @NonNull
     @Override
@@ -25,14 +27,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        ProductsEntity Entity = productsEntities.get(position);
         // replace the data
-        double value = data.get(position);
-        holder.textview.setText(String.valueOf(value));
+        holder.textview.setText(Entity.getProductGrade());
+        holder.textview.setText(Entity.getProductName());
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return productsEntities.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -43,8 +46,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         }
     }
 
-    public Adapter (Vector<Double> data) {
-        this.data = data;
+    public void setProductsEntities(List<ProductsEntity> productsEntities) {
+        this.productsEntities = productsEntities;
+        notifyDataSetChanged();
     }
 
 }

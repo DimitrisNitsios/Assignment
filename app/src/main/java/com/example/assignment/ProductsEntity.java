@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.net.URL;
@@ -14,13 +16,13 @@ public class ProductsEntity implements Serializable {
 
     @PrimaryKey
     @NonNull
-    private String productCode;
+    private String code;
 
-    private String productName;
+    String productName;
 
     private char productGrade;
 
-    private int nova_group;
+    private int novaGroup;
 
     private String ingredients;
 
@@ -29,11 +31,11 @@ public class ProductsEntity implements Serializable {
     private String image;
 
     // Constructor
-    public ProductsEntity(String productCode, String productName, char productGrade, int nova_group, String ingredients, String nutrients, String image) {
-        this.productCode = productCode;
+    public ProductsEntity(String code, String productName, char productGrade, int novaGroup, String ingredients, String nutrients, String image) {
+        this.code = code;
         this.productName = productName;
         this.productGrade = productGrade;
-        this.nova_group = nova_group;
+        this.novaGroup = novaGroup;
         this.ingredients = ingredients;
         this.nutrients = nutrients;
         this.image = image;
@@ -41,7 +43,7 @@ public class ProductsEntity implements Serializable {
 
     //Setters
     public void setProductCode(String productCode) {
-        this.productCode = productCode;
+        this.code = productCode;
     }
 
     public void setProductName(String productName) {
@@ -53,7 +55,7 @@ public class ProductsEntity implements Serializable {
     }
 
     public void setNova_group(int nova_group) {
-        this.nova_group = nova_group;
+        this.novaGroup = nova_group;
     }
 
     public void setIngredients(String ingredients) {
@@ -69,8 +71,9 @@ public class ProductsEntity implements Serializable {
     }
 
     //Getters
-    public String getProductCode() {
-        return productCode;
+    @NonNull
+    public String getCode() {
+        return code;
     }
 
     public String getProductName() {
@@ -81,8 +84,8 @@ public class ProductsEntity implements Serializable {
         return productGrade;
     }
 
-    public int getNova_group() {
-        return nova_group;
+    public int getNovaGroup() {
+        return novaGroup;
     }
 
     public String getIngredients() {

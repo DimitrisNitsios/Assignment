@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 
-@Database(entities = {ListsEntity.class, ProductsEntity.class}, version = 1)
+@Database(entities = {ListsEntity.class, ProductsEntity.class}, version = 2, exportSchema = false)
 public abstract class myDatabase  extends RoomDatabase {
 
     private static volatile myDatabase INSTANCE;
