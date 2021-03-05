@@ -14,16 +14,20 @@ public class ListsEntity implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int listId;
 
+    private String color;
+
     private String listName;
 
     private String description;
 
 
     // constructor that the room uses to create
-    public ListsEntity(String listName, String description) {
+    public ListsEntity(String listName, String description, String color) {
         this.listName = listName;
         this.description = description;
+        this.color = color;
     }
+
 
     //Setters
     public void setListId(int listId) {
@@ -38,6 +42,8 @@ public class ListsEntity implements Serializable {
         this.description = description;
     }
 
+    public void setColor(String color) { this.color = color; }
+
     //Getters
     public int getListId() {
         return listId;
@@ -50,6 +56,8 @@ public class ListsEntity implements Serializable {
     public String getDescription() {
         return description;
     }
+
+    public String getColor() { return color; }
 
 
 }

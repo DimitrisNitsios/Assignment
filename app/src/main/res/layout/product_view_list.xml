@@ -37,7 +37,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/product_view_name"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_delete_forever_24"
+            app:srcCompat="@drawable/ic_baseline_close_24"
             app:tint="?attr/colorError" />
 
         <TextView

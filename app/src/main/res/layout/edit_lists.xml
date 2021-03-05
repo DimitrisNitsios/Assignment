@@ -18,37 +18,74 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.16000003">
+        app:layout_constraintVertical_bias="0.050000012">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/outlinedTextField"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/list_name"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            android:hint="@string/list_name">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/list_edit_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLines="1"
                 android:textSize="15sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/outlinedTextField2"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/list_description"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            android:hint="@string/list_description">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/list_edit_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLines="1"
                 android:textSize="15sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <RadioButton
+                android:paddingStart="8dp"
+                android:paddingEnd="10dp"
+                android:id="@+id/radio_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/white"
+                android:checked="true"/>
+
+            <RadioButton
+                android:paddingStart="8dp"
+                android:paddingEnd="10dp"
+                android:id="@+id/radio_yellow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/yellow"
+                />
+
+            <RadioButton
+                android:paddingStart="8dp"
+                android:paddingEnd="10dp"
+                android:id="@+id/radio_teal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/teal"
+                />
+        </RadioGroup>
 
     </LinearLayout>
 
@@ -58,15 +95,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="?attr/colorSecondary"
+        android:backgroundTint="@color/button_color"
+        android:enabled="false"
         android:onClick="saveList"
         android:text="@string/save"
         app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        android:visibility="invisible"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+    <!-- android:visibility="invisible" -->
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout2"
@@ -94,8 +131,7 @@
             android:backgroundTint="?attr/colorSecondary"
             android:minHeight="?attr/actionBarSize"
             app:hideOnScroll="true"
-            app:menu="@menu/files"
-            app:navigationIcon="@drawable/ic_baseline_fastfood_24" />
+            app:navigationIcon="@drawable/ic_baseline_delete_forever_24" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

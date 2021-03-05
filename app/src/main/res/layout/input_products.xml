@@ -8,6 +8,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,6 +36,8 @@
                 android:hint="@string/input_code">
 
                 <EditText
+                    android:maxLines="1"
+                    android:inputType="number"
                     android:id="@+id/code_entry"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />
@@ -48,6 +51,7 @@
             android:layout_width="80dp"
             android:layout_height="60dp"
             android:backgroundTint="@color/teal_200"
+            android:onClick="goScan"
             android:tint="?attr/colorOnSecondary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,23 +63,25 @@
 
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/save_Product"
             android:layout_width="103dp"
             android:layout_height="42dp"
+            android:enabled="false"
             android:text="@string/save"
-            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageButton2"
             app:layout_constraintHorizontal_bias="0.85"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            android:onClick="saveProduct" />
+        <!-- android:visibility="invisible" -->
 
         <ImageButton
             android:id="@+id/imageButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:backgroundTint="?attr/colorPrimary"
-            android:onClick="go"
+            android:onClick="goGetAPI"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.4"
@@ -86,6 +92,27 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_centerInParent="true"
+        android:id="@+id/display_product"
+        android:layout_width="fill_parent"
+        android:layout_height="221dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        android:textAlignment="center"/>
+
+    <ImageView
+        android:id="@+id/view_product"
+        android:layout_width="215dp"
+        android:layout_height="127dp"
+        app:layout_constraintBottom_toTopOf="@+id/display_product"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

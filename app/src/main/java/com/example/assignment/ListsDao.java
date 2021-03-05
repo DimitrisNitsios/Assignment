@@ -29,4 +29,5 @@ public interface ListsDao {
     @Query("SELECT * FROM Lists_Table ORDER BY listId")
     List<ListsEntity> getAllLists();
 
+
 }
