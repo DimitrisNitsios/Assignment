@@ -29,7 +29,7 @@ import java.util.concurrent.Executors;
 import static com.example.assignment.MainActivity.TAG;
 
 
-@Database(entities = {ListsEntity.class, ProductsEntity.class, JunctionEntity.class}, version = 3, exportSchema = false)
+@Database(entities = {ListsEntity.class, ProductsEntity.class, JunctionEntity.class}, version = 1, exportSchema = false)
 @TypeConverters(Converters.class)
 public abstract class MyDatabase extends RoomDatabase {
     private Activity contextA;

@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/lists"
-        android:icon="@drawable/ic_baseline_format_list_numbered_24"
+        android:icon="@drawable/ic_baseline_format_list_bulleted_50"
         android:title="@string/lists"
         android:contentDescription="@string/lists"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         android:onClick="goToEditListsActivity"
+
         />
 
 

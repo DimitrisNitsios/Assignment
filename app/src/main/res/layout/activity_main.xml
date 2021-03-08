@@ -63,7 +63,8 @@
                     android:minHeight="?attr/actionBarSize"
                     app:hideOnScroll="true"
                     app:menu="@menu/files"
-                    app:navigationIcon="@drawable/ic_baseline_delete_forever_24" />
+                    app:navigationIcon="@drawable/ic_baseline_delete_forever_50"
+                    />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/floatingActionButton"
