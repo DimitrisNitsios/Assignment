@@ -54,7 +54,6 @@ public class InputProductsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         inputCode = findViewById(R.id.code_entry);
         displayProduct = findViewById(R.id.display_product);
         img = findViewById(R.id.view_product);

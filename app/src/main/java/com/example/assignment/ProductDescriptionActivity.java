@@ -61,29 +61,27 @@ public class ProductDescriptionActivity extends AppCompatActivity {
             List<ListsEntity> listsEntities = MyDatabase.getINSTANCE(context).listsDao().getAllLists();
             final ListWithProductsDao listWithProductsDao = MyDatabase.getINSTANCE(this).listWithProductsDao();
 
+            //create the arrays to save the names and ids of the lists
             ArrayList<String> listNames = new ArrayList<>();
             ArrayList<Integer> singleIds = new ArrayList<>();
-
-
-            //save the list ids and names (excluding the online/offline) in suitable structures
+            // save the list ids and names
             for (int i = 0; i < listsEntities.size(); i++) {
                     listNames.add(listsEntities.get(i).getListName());
                     singleIds.add(listsEntities.get(i).getListId());
             }
 
+            // create the alert that displayed the created lists fro the user to click and save
             runOnUiThread(()->{
                 CharSequence[] lists = new CharSequence[listNames.size()];
                 lists = listNames.toArray(lists);
                 builder.setTitle("Select a list");
+                // on click save
                 builder.setItems(lists, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("TAG", "onClick: test");
                         Executors.newSingleThreadExecutor().execute(()->{listWithProductsDao.addProductToList(new JunctionEntity(singleIds.get(which), code));
                             finish();
-                            overridePendingTransition(0, 0);
-                            startActivity(getIntent());
-                            overridePendingTransition(0, 0);});
+                            });
                     }
                 });
                 builder.show();
@@ -93,14 +91,16 @@ public class ProductDescriptionActivity extends AppCompatActivity {
     }
 
     private void loadFromDB() {
+        // get the spsific product from the database
         final ProductsEntity entity =  MyDatabase
                 .getINSTANCE(this)
                 .productsDao()
                 .getProduct(code);
 
-        name.setText("Name: " + String.valueOf(entity.getProductName()));
-        weight.setText("Weight: " + String.valueOf(entity.getWeight()));
-        calories.setText("Calories per serving : " + String.valueOf(entity.getNutriments().getCalories()));
+        // display the datat fromt he product table to the text views
+        name.setText("Name: " + entity.getProductName());
+        weight.setText("Weight: " + entity.getWeight());
+        calories.setText("Calories per serving : " + entity.getNutriments().getCalories());
         viewCode.setText("Code: " + (entity.getCode()));
         grade.setText("Grade: " + String.valueOf(entity.getProductGrade()).toUpperCase());
 
@@ -113,6 +113,7 @@ public class ProductDescriptionActivity extends AppCompatActivity {
         // Use the url to Bitmap to be able to be viewed on the imageView
         try {
             bmp = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
+            // dispaly the image to the image view after it is converted to a bmp
             runOnUiThread(()->{image.setImageBitmap(bmp);});
         } catch (IOException ex) {
             Log.d("Error", ex.getMessage());

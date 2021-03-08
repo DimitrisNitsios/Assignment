@@ -3,6 +3,7 @@ package com.example.assignment;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.ViewHolder> {
             holder.getView().setBackgroundColor(Color.parseColor("#bbf1f1"));
         }
 
+        // when the user clicks the delete icon the list gets removed from the database
         holder.remove.setOnClickListener(v -> {
 
             // Onclicklistener  @override onclick (on the remove button) was converted to lambda ( to remember)
@@ -69,7 +71,8 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.ViewHolder> {
                     ListsEntity entity1 = listsEntities.get(position);
                     // go to the ProductDescriptionActivity and pass the code of the product to the activity
                     Intent intent = new Intent(v.getContext(), IndividualListsActivity.class);
-                    intent.putExtra("id", entity1.getListId());
+                    Log.d("TAG", "onClick: " + entity1.getListId());
+                    intent.putExtra("listId", entity1.getListId());
                     v.getContext().startActivity(intent);
                 });
             }

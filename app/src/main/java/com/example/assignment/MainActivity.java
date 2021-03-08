@@ -67,9 +67,9 @@ public class MainActivity extends AppCompatActivity  {
 
         //reveal or hide the text message depending on connection
         if(isOnline()){
-            findViewById(R.id.view_connection).setVisibility(View.INVISIBLE); // Online
+            runOnUiThread(()->{findViewById(R.id.view_connection).setVisibility(View.INVISIBLE);});  // Online
         }else{
-            findViewById(R.id.view_connection).setVisibility(View.VISIBLE); // Disconnected
+            runOnUiThread(()->{findViewById(R.id.view_connection).setVisibility(View.VISIBLE);});  // Disconnected
         }
 
         builder = new MaterialAlertDialogBuilder(this);
@@ -188,9 +188,11 @@ public class MainActivity extends AppCompatActivity  {
             List<ProductsEntity> productsEntities  = apiResponse.getProductsEntities();
             // for each product entity in the list insert it in the database
             for (ProductsEntity productsEntity: productsEntities) {
-                Executors.newSingleThreadExecutor().execute(()->{
-                    MyDatabase.getINSTANCE(this).productsDao().insert(productsEntity);});
-
+                if (!productsEntity.getImage().isEmpty() || productsEntity.getProductName().equals("") || productsEntity.getImage().equals("image")) {
+                    Executors.newSingleThreadExecutor().execute(() -> {
+                        MyDatabase.getINSTANCE(this).productsDao().insert(productsEntity);
+                    });
+                }
             }
             ListsEntity entity = new ListsEntity("My Fist List", "My First List", "white");
             Executors.newSingleThreadExecutor().execute(()->{MyDatabase.getINSTANCE(this).listsDao().insert(entity);});

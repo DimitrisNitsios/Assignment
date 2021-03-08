@@ -17,6 +17,6 @@ public interface ListWithProductsDao {
     ListWithProducts getListWithProducts(int id);
 
     @Transaction
-    @Query("SELECT * FROM lists_table")
+    @Query("SELECT * FROM Lists_Table")
     List<ListWithProducts> getListsWithProducts();
 }
