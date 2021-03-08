@@ -99,8 +99,7 @@ public class InputProductsActivity extends AppCompatActivity {
         String codeText;
         // Get the edit text object and copy the text
         codeText = String.valueOf(inputCode.getText()).trim();
-        // Remove the text from the Edit text and return the copped text
-        inputCode.getText().clear();
+
        // Log.d(TAG, "SUCCESS code is: " + codeText);
         return codeText;
     }
@@ -172,6 +171,8 @@ public class InputProductsActivity extends AppCompatActivity {
                 // put the scanned text on the input text and the call the api to get the response
                 inputCode.setText(scannedText);
                 getProductAPI();
+                // Remove the text from the Edit text
+                inputCode.getText().clear();
             }
         } else {
             // This is important, otherwise the result will not be passed to the fragment

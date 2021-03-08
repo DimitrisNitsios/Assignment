@@ -20,6 +20,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="80dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -36,52 +37,46 @@
                 android:hint="@string/input_code">
 
                 <EditText
-                    android:maxLines="1"
-                    android:inputType="number"
                     android:id="@+id/code_entry"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/imageButton2"
-            style="@android:style/Widget.Material.ImageButton"
-            android:layout_width="80dp"
-            android:layout_height="60dp"
-            android:backgroundTint="@color/teal_200"
-            android:onClick="goScan"
-            android:tint="?attr/colorOnSecondary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.85"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-            app:layout_constraintVertical_bias="0.038"
-            app:srcCompat="@drawable/ic_baseline_qr_code_scanner_24" />
 
-
-        <Button
-            android:id="@+id/save_Product"
-            android:layout_width="103dp"
-            android:layout_height="42dp"
-            android:enabled="false"
-            android:text="@string/save"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton2"
-            app:layout_constraintHorizontal_bias="0.85"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-            android:onClick="saveProduct" />
         <!-- android:visibility="invisible" -->
 
         <ImageButton
+            android:id="@+id/imageButton2"
+            style="@android:style/Widget.Material.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/teal_200"
+            android:onClick="goScan"
+            android:padding="20dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:tint="?attr/colorOnSecondary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            app:srcCompat="@drawable/ic_baseline_qr_code_scanner_24"
+            tools:ignore="RtlSymmetry" />
+
+        <ImageButton
             android:id="@+id/imageButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:backgroundTint="?attr/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="?attr/colorSecondary"
             android:onClick="goGetAPI"
+            android:padding="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.4"
@@ -94,16 +89,19 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:layout_centerInParent="true"
         android:id="@+id/display_product"
         android:layout_width="fill_parent"
-        android:layout_height="221dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="10dp"
+        android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        android:textAlignment="center"/>
+        app:layout_constraintVertical_bias="0.395" />
 
     <ImageView
         android:id="@+id/view_product"
@@ -113,6 +111,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <Button
+
+        android:id="@+id/save_Product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:onClick="saveProduct"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/display_product" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
